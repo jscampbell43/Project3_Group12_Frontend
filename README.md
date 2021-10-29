@@ -1,5 +1,7 @@
-# FILA
+# FILA FRONTEND
 *Erik Gallardo-Cruz, Guillermo Flores V, James Campbell, Michael Haidar*
+
+This is the repo for our Front end Android Application which is consuming this [web-based API](https://github.com/GuillermoFloresV/Project3_Group12_Backend)
 
 Fila is a 3d-printing marketplace. Publishers are able to request projects (print jobs) across the platform. 
 These projects include model specifics, print quality, build time, price, currency, and other job specific details needed.
