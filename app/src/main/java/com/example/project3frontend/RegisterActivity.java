@@ -13,7 +13,7 @@ import android.widget.Toast;
 public class RegisterActivity extends AppCompatActivity {
     // Layout pieces
     private TextView textViewRegisterWelcome;
-    private EditText editTextRegisterUsername;
+    private EditText editTextRegisterEmail;
     private EditText editTextRegisterPassword;
     private EditText editTextRegisterPasswordAgain;
     private Button buttonRegister;
@@ -26,7 +26,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         // Attach layout
         textViewRegisterWelcome = findViewById(R.id.textViewRegisterWelcome);
-        editTextRegisterUsername = findViewById(R.id.editTextRegisterUsername);
+        editTextRegisterEmail = findViewById(R.id.editTextRegisterEmail);
         editTextRegisterPassword = findViewById(R.id.editTextRegisterPassword);
         editTextRegisterPasswordAgain = findViewById(R.id.editTextRegisterPasswordAgain);
         buttonRegister = findViewById(R.id.buttonRegister);
@@ -37,11 +37,11 @@ public class RegisterActivity extends AppCompatActivity {
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String username = editTextRegisterUsername.getText().toString();
+                String email = editTextRegisterEmail.getText().toString();
                 String password = editTextRegisterPassword.getText().toString();
                 String passwordAgain = editTextRegisterPasswordAgain.getText().toString();
                 // If username or password is blank
-                if(username.isEmpty() || password.isEmpty()) {
+                if(email.isEmpty() || password.isEmpty() || passwordAgain.isEmpty()) {
                     Toast.makeText(RegisterActivity.this, "All fields required", Toast.LENGTH_SHORT).show();
                 // If passwords do not match
                 } else if(!password.equals(passwordAgain)){

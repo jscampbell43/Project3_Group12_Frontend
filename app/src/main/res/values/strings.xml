@@ -4,7 +4,7 @@
     <string name="password_again">Password Again</string>
     <string name="login">Login</string>
     <string name="create_account">Create Account</string>
-    <string name="username">Username</string>
+    <string name="email">Email</string>
     <string name="welcome">Login</string>
     <string name="register">Register</string>
 </resources>
