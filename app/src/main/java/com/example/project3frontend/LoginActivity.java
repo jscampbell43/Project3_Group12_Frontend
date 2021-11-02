@@ -61,8 +61,8 @@ public class LoginActivity extends AppCompatActivity {
         mCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = factory.getIntent(MainActivity.this, RegisterActivity.class);
-//                startActivity(intent);
+                Intent intent = factory.getIntent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
             }
         });
     }
