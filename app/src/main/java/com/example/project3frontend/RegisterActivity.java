@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 public class RegisterActivity extends AppCompatActivity {
     // Layout pieces
+    private Button buttonBackToLogin;
     private TextView textViewRegisterWelcome;
     private EditText editTextRegisterEmail;
     private EditText editTextRegisterPassword;
@@ -19,12 +20,16 @@ public class RegisterActivity extends AppCompatActivity {
     private Button buttonRegister;
     private static final String TAG = "RegisterActivity";
 
+//    private DatabaseReference mDatabase;
+//    mDatabase = FirebaseDatabase.getInstance().getReference();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
         // Attach layout
+        buttonBackToLogin = findViewById(R.id.buttonBackToLogin);
         textViewRegisterWelcome = findViewById(R.id.textViewRegisterWelcome);
         editTextRegisterEmail = findViewById(R.id.editTextRegisterEmail);
         editTextRegisterPassword = findViewById(R.id.editTextRegisterPassword);
@@ -54,6 +59,14 @@ public class RegisterActivity extends AppCompatActivity {
                     Intent intent = factory.getIntent(RegisterActivity.this, LoginActivity.class);
                     startActivity(intent);
                 }
+            }
+        });
+
+        buttonBackToLogin.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = factory.getIntent(RegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
             }
         });
     }
