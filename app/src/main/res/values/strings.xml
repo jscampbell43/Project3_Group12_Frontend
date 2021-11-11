@@ -14,4 +14,10 @@
     <string name="publish">Publish</string>
     <string name="username">Email</string>
     <string name="back_login">Back</string>
+    <string name="profile">Profile</string>
+    <string name="request">Request</string>
+    <string name="find">Find</string>
+    <string name="search_project">Search Projects</string>
+    <string name="open_projects">Open Projects</string>
+    <string name="search_project_button">Search</string>
 </resources>
