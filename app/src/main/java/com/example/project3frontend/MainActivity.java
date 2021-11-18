@@ -15,8 +15,6 @@ public class MainActivity extends AppCompatActivity {
     // Layout pieces
     private TextView textViewProfileWelcome;
     private static final String TAG = "MainActivity";
-    private Button buttonRequest;
-    private Button buttonFind;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,28 +23,9 @@ public class MainActivity extends AppCompatActivity {
 
         // Attach layout
         textViewProfileWelcome = findViewById(R.id.textViewProfileWelcome);
-        buttonRequest = findViewById(R.id.buttonRequest);
-        buttonFind = findViewById(R.id.buttonFind);
 
         // Intent Factory for buttons
         IntentFactory factory = new IntentFactory();
 
-        buttonRequest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = factory.getIntent(MainActivity.this, NewRequestActivity.class);
-                    startActivity(intent);
-            }
-
-        });
-
-        buttonFind.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = factory.getIntent(MainActivity.this, OpenProjectsActivity.class);
-                startActivity(intent);
-            }
-
-        });
     }
 }
