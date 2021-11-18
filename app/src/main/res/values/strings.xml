@@ -14,4 +14,20 @@
     <string name="publish">Publish</string>
     <string name="username">Email</string>
     <string name="back_login">Back</string>
+    <string name="pic_profile">pic_profile</string>
+    <string name="ui_ux_designer_foodie_ukraine">ui_ux_designer_foodie_ukraine</string>
+    <string name="_962">962</string>
+    <string name="_49k">49k</string>
+    <string name="_4_9k">_4_9k</string>
+    <string name="_165">_165</string>
+    <string name="posts">Post</string>
+    <string name="followers">followers</string>
+    <string name="following">following</string>
+    <string name="tags">tags</string>
+    <string name="stylish">Stylish</string>
+    <string name="model">Model</string>
+    <string name="runner">Runner</string>
+    <string name="adventurous">Adventurous</string>
+    <string name="collection">Collection</string>
+    <string name="current_projects">Current Projects</string>
 </resources>
