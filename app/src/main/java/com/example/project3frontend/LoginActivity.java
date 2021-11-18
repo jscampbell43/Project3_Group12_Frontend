@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
                     //if user does not exist then display error message.
                     //Use intent factory to proceed to next page
                     //Use boolean statements to verify true or false for validate user and for testing purposes.
-                    Intent intent = factory.getIntent(LoginActivity.this, MainActivity.class);
+                    Intent intent = factory.getIntent(LoginActivity.this, LandingActivity.class);
                     startActivity(intent);
                 }
             }
