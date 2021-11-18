@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 public class NewRequestActivity extends AppCompatActivity {
     // Layout pieces
+    private Button buttonBackToProfile;
     private TextView textViewNewRequestWelcome;
     private EditText editTextTitle;
     private EditText editTextDescription;
@@ -30,9 +31,18 @@ public class NewRequestActivity extends AppCompatActivity {
         editTextDescription = findViewById(R.id.editTextDescription);
         editTextImage = findViewById(R.id.editTextImage);
         buttonPublish = findViewById(R.id.buttonPublish);
+        buttonBackToProfile = findViewById(R.id.buttonBackToProfile);
 
         // Intent Factory for buttons
         IntentFactory factory = new IntentFactory();
+
+        buttonBackToProfile.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = factory.getIntent(NewRequestActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         buttonPublish.setOnClickListener(new View.OnClickListener() {
             @Override
