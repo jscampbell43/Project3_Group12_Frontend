@@ -20,4 +20,5 @@
     <string name="search_project">Search Projects</string>
     <string name="open_projects">Open Projects</string>
     <string name="search_project_button">Search</string>
+    <string name="default_project_item">Default Project Item</string>
 </resources>
