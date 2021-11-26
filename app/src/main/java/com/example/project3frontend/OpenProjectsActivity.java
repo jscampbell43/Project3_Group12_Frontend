@@ -1,6 +1,8 @@
 package com.example.project3frontend;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +19,8 @@ public class OpenProjectsActivity extends AppCompatActivity {
     private TextView textViewOpenProjectsWelcome;
     private EditText editTextSearchProject;
     private Button buttonSearchProject;
+    String data[];
+    RecyclerView rvProjectList;
     private static final String TAG = "NewRequestActivity";
 
     @Override
@@ -29,9 +33,14 @@ public class OpenProjectsActivity extends AppCompatActivity {
         editTextSearchProject = findViewById(R.id.editTextSearchProject);
         buttonSearchProject = findViewById(R.id.buttonSearchProject);
         buttonBackToProfile = findViewById(R.id.buttonBackToProfile);
+        rvProjectList = findViewById(R.id.rvProjects);
 
         // call API to get instance of database and access list of all published projects
+        data = new String[]{"test_1", "test_2", "test_3"};
 
+        ProjectListAdapter projectListAdapter = new ProjectListAdapter(this, data);
+        rvProjectList.setAdapter(projectListAdapter);
+        rvProjectList.setLayoutManager(new LinearLayoutManager(this));
 
         // Intent Factory for buttons
         IntentFactory factory = new IntentFactory();
