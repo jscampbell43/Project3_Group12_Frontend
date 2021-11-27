@@ -4,6 +4,7 @@ import static java.lang.Integer.parseInt;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 //import com.example.project1_cst483_group5.db.Pet;
@@ -55,6 +57,16 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
         holder.titleText.setText(data[position]);
         //holder.descriptionText.setText(data[position]);
         //holder.projectImage.setImageResource(/*data[position] NEEDS TO BE AN IMAGE, OR URL?*/);
+
+        holder.projectDetailsLayout.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, OpenProjectDetailsActivity.class);
+                intent.putExtra("data", data[position]);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -66,12 +78,14 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
 
         TextView titleText, descriptionText;
         ImageView projectImage;
+        ConstraintLayout projectDetailsLayout;
 
         public ProjectListViewHolder(@NonNull View itemView) {
             super(itemView);
             titleText = itemView.findViewById(R.id.textviewProjectTitle);
             descriptionText = itemView.findViewById(R.id.textViewProjectDescription);
             projectImage = itemView.findViewById(R.id.imageViewProjectImage);
+            projectDetailsLayout = itemView.findViewById(R.id.projectDetailsLayout);
         }
     }
 
