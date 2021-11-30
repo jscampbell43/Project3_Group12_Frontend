@@ -54,7 +54,7 @@ public class ProjectListViewHolder extends RecyclerView.ViewHolder {
      */
     public ProjectListViewHolder(@NonNull View itemView) {
         super(itemView);
-        id = itemView.findViewById(R.id.textViewProjectId);
+        //id = itemView.findViewById(R.id.textViewProjectId);
         title = itemView.findViewById(R.id.textViewProjectTitle);
         description = itemView.findViewById(R.id.textViewProjectDescription);
         image = itemView.findViewById(R.id.imageViewProjectImage);
