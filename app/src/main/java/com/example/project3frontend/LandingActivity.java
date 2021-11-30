@@ -1,5 +1,6 @@
 package com.example.project3frontend;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AnimationUtils;
@@ -43,6 +44,7 @@ public class LandingActivity extends AppCompatActivity {
         floatingActionButton3 = findViewById(R.id.floatingActionButton3);
         textName = findViewById(R.id.textName);
         textAbout = findViewById(R.id.textAbout);
+        IntentFactory factory = new IntentFactory();
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,13 +56,15 @@ public class LandingActivity extends AppCompatActivity {
         floatingActionButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = factory.getIntent(LandingActivity.this, NewRequestActivity.class);
+                startActivity(intent);
             }
         });
         floatingActionButton3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = factory.getIntent(LandingActivity.this, OpenProjectsActivity.class);
+                startActivity(intent);
             }
         });
 
