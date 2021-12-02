@@ -150,7 +150,7 @@
             android:id="@+id/imageProfile"
             android:layout_width="90dp"
             android:layout_height="100dp"
-            android:src="@drawable/mario"
+            android:src="@drawable/ic_image"
             app:layout_constraintBottom_toTopOf="@+id/layoutProfile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

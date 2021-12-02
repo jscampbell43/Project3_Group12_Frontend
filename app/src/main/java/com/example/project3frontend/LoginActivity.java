@@ -27,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button buttonLogin;
     private static final String TAG = "LoginActivity";
     private Button mCreateAccount;
+    private List<User> users;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         // Instance of Retrofit
         // Note Change .baseUrl to our heroku hosted API
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://jsonplaceholder.typicode.com/")
+                .baseUrl("https://shrouded-hollows-49087.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         UserApi userApi = retrofit.create(UserApi.class);
@@ -60,10 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Code: " + response.code(), Toast.LENGTH_SHORT).show();
                     return;
                 }
-                List<User> users = response.body();
-                for (User user : users){
-                    System.out.println("User Id: " + user.getUserId());
-                }
+                users = response.body();
             }
 
             @Override
@@ -88,8 +86,25 @@ public class LoginActivity extends AppCompatActivity {
                     //if user does not exist then display error message.
                     //Use intent factory to proceed to next page
                     //Use boolean statements to verify true or false for validate user and for testing purposes.
-                    Intent intent = factory.getIntent(LoginActivity.this, LandingActivity.class);
-                    startActivity(intent);
+                    boolean userFound = false;
+                    for (User user : users){
+                        // If username exists
+                        if(user.getUsername().equals(username)){
+                            userFound = true;
+                            // If password matches this users password
+                            if(user.getPassword().equals(password)){
+                                // Start Landing Activity
+                                Intent intent = factory.getIntent(LoginActivity.this, LandingActivity.class);
+                                startActivity(intent);
+                            }
+                            else{
+                                Toast.makeText(LoginActivity.this, "Password is incorrect", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                    if(!userFound){
+                        Toast.makeText(LoginActivity.this, "Username not found", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
