@@ -18,7 +18,7 @@ Fila aims to create an open, secure marketplace where enthusiasts and the curiou
  <tr>
  
  </tr>
- <tr>
+ <tr>git
     <td>/users/login</td>
     <td>/projects/project_info</td>
     <td>/users/settings</td>
