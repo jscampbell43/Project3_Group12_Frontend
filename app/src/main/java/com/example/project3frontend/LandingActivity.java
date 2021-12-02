@@ -29,6 +29,7 @@ public class LandingActivity extends AppCompatActivity {
     private FloatingActionButton floatingActionButton;
     private FloatingActionButton floatingActionButton2;
     private FloatingActionButton floatingActionButton3;
+    private Button logout;
     private TextView textName;
     private TextView textAbout;
 
@@ -42,6 +43,7 @@ public class LandingActivity extends AppCompatActivity {
         floatingActionButton = findViewById(R.id.floatingActionButton);
         floatingActionButton2 = findViewById(R.id.floatingActionButton2);
         floatingActionButton3 = findViewById(R.id.floatingActionButton3);
+        logout = findViewById(R.id.logout);
         textName = findViewById(R.id.textName);
         textAbout = findViewById(R.id.textAbout);
         IntentFactory factory = new IntentFactory();
@@ -64,6 +66,13 @@ public class LandingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = factory.getIntent(LandingActivity.this, OpenProjectsActivity.class);
+                startActivity(intent);
+            }
+        });
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = factory.getIntent(LandingActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });
