@@ -16,6 +16,7 @@
             android:layout_height="150dp"
             android:background="@drawable/header_background"
             app:layout_constraintTop_toTopOf="parent"/>
+
         <FrameLayout
             android:id="@+id/layoutProfile"
             android:layout_width="match_parent"
@@ -220,6 +221,22 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/floatingActionButton" />
+
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="74dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/custom_button"
+            android:text="Sign Out"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textColorHighlight="#FFFFFF"
+            android:textColorHint="#FDFDFD"
+            android:textColorLink="#DD1B1B"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <!--        <HorizontalScrollView-->
