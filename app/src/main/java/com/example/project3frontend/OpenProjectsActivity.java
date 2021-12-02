@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class OpenProjectsActivity extends AppCompatActivity {
+public class OpenProjectsActivity extends AppCompatActivity implements ProjectListAdapter.OnProjectClickListener{
 
     // Layout pieces
     private Button buttonBackToProfile;
@@ -38,7 +38,7 @@ public class OpenProjectsActivity extends AppCompatActivity {
         // call API to get instance of database and access list of all published projects
         data = new String[]{"test_1", "test_2", "test_3"};
 
-        ProjectListAdapter projectListAdapter = new ProjectListAdapter(this, data);
+        ProjectListAdapter projectListAdapter = new ProjectListAdapter(this, data, this);
         rvProjectList.setAdapter(projectListAdapter);
         rvProjectList.setLayoutManager(new LinearLayoutManager(this));
 
@@ -70,5 +70,13 @@ public class OpenProjectsActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onProjectClick(int position) {
+        String s = data[position];
+        Intent intent = new Intent(getApplicationContext(), OpenProjectDetailsActivity.class);
+        intent.putExtra("data", data[position]);
+        startActivity(intent);
     }
 }

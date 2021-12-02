@@ -11,6 +11,14 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class LoginActivity extends AppCompatActivity {
     // Layout pieces
     private TextView textViewLoginWelcome;
@@ -19,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button buttonLogin;
     private static final String TAG = "LoginActivity";
     private Button mCreateAccount;
+    private List<User> users;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +43,32 @@ public class LoginActivity extends AppCompatActivity {
 
         // Intent Factory for buttons
         IntentFactory factory = new IntentFactory();
+
+        // Instance of Retrofit
+        // Note Change .baseUrl to our heroku hosted API
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://shrouded-hollows-49087.herokuapp.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        UserApi userApi = retrofit.create(UserApi.class);
+        Call<List<User>> call = userApi.getUsers();
+
+        call.enqueue(new Callback<List<User>>(){
+
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                if(!response.isSuccessful()){
+                    Toast.makeText(LoginActivity.this, "Code: " + response.code(), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                users = response.body();
+            }
+
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+                Toast.makeText(LoginActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,8 +86,25 @@ public class LoginActivity extends AppCompatActivity {
                     //if user does not exist then display error message.
                     //Use intent factory to proceed to next page
                     //Use boolean statements to verify true or false for validate user and for testing purposes.
-                    Intent intent = factory.getIntent(LoginActivity.this, LandingActivity.class);
-                    startActivity(intent);
+                    boolean userFound = false;
+                    for (User user : users){
+                        // If username exists
+                        if(user.getUsername().equals(username)){
+                            userFound = true;
+                            // If password matches this users password
+                            if(user.getPassword().equals(password)){
+                                // Start Landing Activity
+                                Intent intent = factory.getIntent(LoginActivity.this, LandingActivity.class);
+                                startActivity(intent);
+                            }
+                            else{
+                                Toast.makeText(LoginActivity.this, "Password is incorrect", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                    if(!userFound){
+                        Toast.makeText(LoginActivity.this, "Username not found", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
