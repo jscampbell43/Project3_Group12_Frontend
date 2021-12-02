@@ -17,14 +17,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/imageViewProjectImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_launcher_foreground" />
+<!--            <ImageView-->
+<!--                android:id="@+id/imageViewProjectImage"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"/>-->
+<!--&lt;!&ndash;                app:srcCompat="@drawable/ic_launcher_foreground" />&ndash;&gt;-->
 
             <TextView
                 android:id="@+id/textViewProjectTitle"
@@ -49,8 +49,8 @@
                 android:textColor="@color/black"
                 android:textSize="34sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/textviewProjectTitle"
-                app:layout_constraintTop_toBottomOf="@+id/textviewProjectTitle" />
+                app:layout_constraintStart_toStartOf="@+id/textViewProjectTitle"
+                app:layout_constraintTop_toBottomOf="@+id/textViewProjectTitle" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

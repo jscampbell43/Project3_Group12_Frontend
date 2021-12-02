@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
         // Instance of Retrofit
         // Note Change .baseUrl to our heroku hosted API
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://jsonplaceholder.typicode.com/")
+                .baseUrl("https://shrouded-hollows-49087.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         UserApi userApi = retrofit.create(UserApi.class);
@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 List<User> users = response.body();
                 for (User user : users){
-                    System.out.println("User Id: " + user.getUserId());
+                    System.out.println("User Id: " + user.getUsername());
                 }
             }
 

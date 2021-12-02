@@ -2,26 +2,32 @@ package com.example.project3frontend;
 
 public class User {
 
-    // Note these names need to MATCH the JSON keys
-    // Or use @SerializedName("key_name") to convert dynamically
-    private int userId;
-    private String userName;
-    private String password;
-    private float rating;
-
-    public int getUserId() {
-        return userId;
+    public String getUsername() {
+        return username;
     }
 
-    public String getUserName() {
-        return userName;
+    public float getRating() {
+        return rating;
+    }
+
+    public boolean isFullfiller() {
+        return isFullfiller;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public float getRating() {
-        return rating;
-    }
+    // Note these names need to MATCH the JSON keys
+    // Or use @SerializedName("key_name") to convert dynamically
+    private String username;
+    private float rating;
+    //private GeoPoint city;
+    private boolean isFullfiller;
+    private String email;
+    private String password;
 }

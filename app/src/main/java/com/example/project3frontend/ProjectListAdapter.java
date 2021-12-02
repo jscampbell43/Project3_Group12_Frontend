@@ -36,12 +36,15 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
 
     String data[];
     Context context;
+    OnProjectClickListener onProjectClickListener;
 
     //Constructor
     // Needs array input parameter
-    public ProjectListAdapter(Context c, String d[]){
-        context = context;
+    public ProjectListAdapter(Context c, String d[], OnProjectClickListener listener){
+        context = c;
         data = d;
+        onProjectClickListener = listener;
+
     }
 
     @NonNull
@@ -49,7 +52,7 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
     public ProjectListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.project_itemview, parent, false);
-        return new ProjectListViewHolder(view);
+        return new ProjectListViewHolder(view, onProjectClickListener);
     }
 
     @Override
@@ -58,15 +61,15 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
         //holder.descriptionText.setText(data[position]);
         //holder.projectImage.setImageResource(/*data[position] NEEDS TO BE AN IMAGE, OR URL?*/);
 
-        holder.projectDetailsLayout.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, OpenProjectDetailsActivity.class);
-                intent.putExtra("data", data[position]);
-                context.startActivity(intent);
-            }
-        });
+//        holder.projectDetailsLayout.setOnClickListener(new View.OnClickListener(){
+//
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(context, OpenProjectDetailsActivity.class);
+//                intent.putExtra("data", data[position]);
+//                context.startActivity(intent);
+//            }
+//        });
     }
 
     @Override
@@ -74,19 +77,31 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
         return data.length;
     }
 
-    public class ProjectListViewHolder extends RecyclerView.ViewHolder{
+    public class ProjectListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView titleText, descriptionText;
         ImageView projectImage;
         ConstraintLayout projectDetailsLayout;
+        public OnProjectClickListener onProjectClickListener;
 
-        public ProjectListViewHolder(@NonNull View itemView) {
+        public ProjectListViewHolder(@NonNull View itemView, OnProjectClickListener listener) {
             super(itemView);
-            titleText = itemView.findViewById(R.id.textviewProjectTitle);
+            titleText = itemView.findViewById(R.id.textViewProjectTitle);
             descriptionText = itemView.findViewById(R.id.textViewProjectDescription);
             projectImage = itemView.findViewById(R.id.imageViewProjectImage);
             projectDetailsLayout = itemView.findViewById(R.id.projectDetailsLayout);
+            onProjectClickListener = listener;
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View view) {
+            onProjectClickListener.onProjectClick(getAbsoluteAdapterPosition());
+        }
+    }
+
+    public interface OnProjectClickListener{
+        void onProjectClick(int position);
     }
 
 }

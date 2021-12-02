@@ -8,6 +8,6 @@ import retrofit2.http.GET;
 public interface UserApi {
     // Note this relative url must match the API
     // "posts" is for testing purposes
-    @GET("posts")
+    @GET("getAllUsers")
     Call<List<User>> getUsers();
 }
