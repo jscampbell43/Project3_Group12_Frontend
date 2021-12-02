@@ -39,7 +39,7 @@ public class NewRequestActivity extends AppCompatActivity {
         buttonBackToProfile.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Intent intent = factory.getIntent(NewRequestActivity.this, MainActivity.class);
+                Intent intent = factory.getIntent(NewRequestActivity.this, LandingActivity.class);
                 startActivity(intent);
             }
         });
