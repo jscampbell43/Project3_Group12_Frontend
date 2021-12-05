@@ -18,6 +18,8 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 //import com.example.project1_cst483_group5.db.Pet;
 //import com.example.project1_cst483_group5.db.ProjectViewModel;
 //import com.squareup.picasso.Picasso;
@@ -34,15 +36,15 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.ProjectListViewHolder> {
 
-    String data[];
+    List<Project> projects;
     Context context;
     OnProjectClickListener onProjectClickListener;
 
     //Constructor
     // Needs array input parameter
-    public ProjectListAdapter(Context c, String d[], OnProjectClickListener listener){
+    public ProjectListAdapter(Context c, List<Project> d, OnProjectClickListener listener){
         context = c;
-        data = d;
+        projects = d;
         onProjectClickListener = listener;
 
     }
@@ -57,7 +59,8 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ProjectListViewHolder holder, int position) {
-        holder.titleText.setText(data[position]);
+        holder.titleText.setText(projects.get(position).getProjectName());
+        holder.descriptionText.setText(projects.get(position).getDescription());
         //holder.descriptionText.setText(data[position]);
         //holder.projectImage.setImageResource(/*data[position] NEEDS TO BE AN IMAGE, OR URL?*/);
 
@@ -74,7 +77,7 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
 
     @Override
     public int getItemCount() {
-        return data.length;
+        return projects.size();
     }
 
     public class ProjectListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{

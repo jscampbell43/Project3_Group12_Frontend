@@ -12,6 +12,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class OpenProjectsActivity extends AppCompatActivity implements ProjectListAdapter.OnProjectClickListener{
 
     // Layout pieces
@@ -22,6 +30,7 @@ public class OpenProjectsActivity extends AppCompatActivity implements ProjectLi
     String data[];
     RecyclerView rvProjectList;
     private static final String TAG = "NewRequestActivity";
+    List<Project> projects;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +46,33 @@ public class OpenProjectsActivity extends AppCompatActivity implements ProjectLi
 
         // call API to get instance of database and access list of all published projects
         data = new String[]{"test_1", "test_2", "test_3"};
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://shrouded-hollows-49087.herokuapp.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
-        ProjectListAdapter projectListAdapter = new ProjectListAdapter(this, data, this);
-        rvProjectList.setAdapter(projectListAdapter);
-        rvProjectList.setLayoutManager(new LinearLayoutManager(this));
+        ProjectApi projectApi = retrofit.create(ProjectApi.class);
+
+        Call<List<Project>> call = projectApi.getProjects();
+
+        call.enqueue(new Callback<List<Project>>() {
+            @Override
+            public void onResponse(Call<List<Project>> call, Response<List<Project>> response) {
+                if(!response.isSuccessful()){
+                    Toast.makeText(OpenProjectsActivity.this, "Code: " + response.code(), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                projects = response.body();
+                ProjectListAdapter projectListAdapter = new ProjectListAdapter(OpenProjectsActivity.this, projects, OpenProjectsActivity.this);
+                rvProjectList.setAdapter(projectListAdapter);
+                rvProjectList.setLayoutManager(new LinearLayoutManager(OpenProjectsActivity.this));
+            }
+
+            @Override
+            public void onFailure(Call<List<Project>> call, Throwable t) {
+                Toast.makeText(OpenProjectsActivity.this, "Call Failed: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         // Intent Factory for buttons
         IntentFactory factory = new IntentFactory();

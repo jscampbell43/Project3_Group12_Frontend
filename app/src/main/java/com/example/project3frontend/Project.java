@@ -9,6 +9,7 @@ public class Project {
     private boolean anon;
     private String projectName;
     private float budget;
+    private String description;
 
     // Setters
     public void setProject_id(Integer project_id) {
@@ -42,6 +43,11 @@ public class Project {
     public void setAnon(boolean anon) {
         this.anon = anon;
     }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     // Getters
     public Integer getProject_id() {
         return project_id;
@@ -73,5 +79,9 @@ public class Project {
 
     public boolean isAnon() {
         return anon;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }
