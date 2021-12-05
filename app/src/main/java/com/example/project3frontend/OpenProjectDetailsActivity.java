@@ -13,6 +13,7 @@ public class OpenProjectDetailsActivity extends AppCompatActivity {
     TextView projectTitle;
     TextView projectDescription;
 
+    Bundle extras;
     String title, description;
 
 
@@ -31,17 +32,14 @@ public class OpenProjectDetailsActivity extends AppCompatActivity {
     }
 
     private void getData(){
-        if(getIntent().hasExtra("data")){
-            title = getIntent().getStringExtra("data");
-            // Need to pass more data parameters
-        }
-        else{
-            Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();
-        }
+        extras = getIntent().getExtras();
+        // Need to pass more data parameters
+
     }
 
     private void setData(){
-        projectTitle.setText(title);
+        projectTitle.setText(extras.getString("PROJECT_NAME"));
+        projectDescription.setText(extras.getString("DESCRIPTION"));
         // set description and image
     }
 }

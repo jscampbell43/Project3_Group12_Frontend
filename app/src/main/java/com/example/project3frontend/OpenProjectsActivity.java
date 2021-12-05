@@ -104,11 +104,33 @@ public class OpenProjectsActivity extends AppCompatActivity implements ProjectLi
 
     }
 
+
+//    private Integer project_id;
+//    private String currency;
+//    private boolean isOpen;
+//    private String urlString;
+//    private String datePublished;
+//    private boolean anon;
+//    private String projectName;
+//    private float budget;
+//    private String description;
+
     @Override
     public void onProjectClick(int position) {
         String s = data[position];
         Intent intent = new Intent(getApplicationContext(), OpenProjectDetailsActivity.class);
-        intent.putExtra("data", data[position]);
+        Bundle extras = new Bundle();
+        //extras.putInt("ID", projects.get(position).getProject_id());
+        extras.putString("CURRENCY", projects.get(position).getCurrency());
+        extras.putBoolean("IS_OPEN", projects.get(position).isOpen());
+        extras.putString("URL_STRING", projects.get(position).getUrlString());
+        extras.putString("DATE_PUBLISHED", projects.get(position).getDatePublished());
+        extras.putBoolean("ANON", projects.get(position).isAnon());
+        extras.putString("PROJECT_NAME", projects.get(position).getProjectName());
+        extras.putFloat("BUDGET", projects.get(position).getBudget());
+        extras.putString("DESCRIPTION", projects.get(position).getDescription());
+
+        intent.putExtras(extras);
         startActivity(intent);
     }
 }
