@@ -27,7 +27,6 @@ public class OpenProjectsActivity extends AppCompatActivity implements ProjectLi
     private TextView textViewOpenProjectsWelcome;
     private EditText editTextSearchProject;
     private Button buttonSearchProject;
-    String data[];
     RecyclerView rvProjectList;
     private static final String TAG = "NewRequestActivity";
     List<Project> projects;
@@ -45,7 +44,6 @@ public class OpenProjectsActivity extends AppCompatActivity implements ProjectLi
         rvProjectList = findViewById(R.id.rvProjects);
 
         // call API to get instance of database and access list of all published projects
-        data = new String[]{"test_1", "test_2", "test_3"};
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://shrouded-hollows-49087.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -104,22 +102,11 @@ public class OpenProjectsActivity extends AppCompatActivity implements ProjectLi
 
     }
 
-
-//    private Integer project_id;
-//    private String currency;
-//    private boolean isOpen;
-//    private String urlString;
-//    private String datePublished;
-//    private boolean anon;
-//    private String projectName;
-//    private float budget;
-//    private String description;
-
     @Override
     public void onProjectClick(int position) {
-        String s = data[position];
         Intent intent = new Intent(getApplicationContext(), OpenProjectDetailsActivity.class);
         Bundle extras = new Bundle();
+
         //extras.putInt("ID", projects.get(position).getProject_id());
         extras.putString("CURRENCY", projects.get(position).getCurrency());
         extras.putBoolean("IS_OPEN", projects.get(position).isOpen());
