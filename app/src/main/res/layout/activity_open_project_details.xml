@@ -7,15 +7,15 @@
     tools:context=".OpenProjectDetailsActivity"
     android:id="@+id/projectDetailsLayout">
 
-<!--    <ImageView-->
-<!--        android:id="@+id/imageViewProjectImageDetails"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="200dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:srcCompat="@drawable/ic_launcher_foreground" />-->
+    <ImageView
+        android:id="@+id/imageViewProjectImageDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_launcher_foreground" />
 
     <TextView
         android:id="@+id/textViewProjectTitleDetails"
@@ -43,9 +43,47 @@
         android:text="Description"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="34sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewProjectTitleDetails" />
+
+    <TextView
+        android:id="@+id/textViewProjectCurrencyDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Currency"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/textViewProjectDescriptionDetails"
+        app:layout_constraintTop_toBottomOf="@+id/textViewProjectDescriptionDetails" />
+
+    <TextView
+        android:id="@+id/textViewProjectDatePublishedDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="20dp"
+        android:text="Date"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewProjectImageDetails"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewProjectBudgetDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:text="Budget"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/textViewProjectCurrencyDetails"
+        app:layout_constraintTop_toBottomOf="@+id/textViewProjectDescriptionDetails" />
 </androidx.constraintlayout.widget.ConstraintLayout>
