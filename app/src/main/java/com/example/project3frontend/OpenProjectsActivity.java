@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -23,10 +25,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class OpenProjectsActivity extends AppCompatActivity implements ProjectListAdapter.OnProjectClickListener{
 
     // Layout pieces
-    private Button buttonBackToProfile;
+    private Button buttonBackToProfile, buttonViewAllProjects, buttonSearchProject;
     private TextView textViewOpenProjectsWelcome;
     private EditText editTextSearchProject;
-    private Button buttonSearchProject;
     RecyclerView rvProjectList;
     private static final String TAG = "NewRequestActivity";
     List<Project> projects;
@@ -40,6 +41,7 @@ public class OpenProjectsActivity extends AppCompatActivity implements ProjectLi
         textViewOpenProjectsWelcome = findViewById(R.id.textViewOpenProjectsWelcome);
         editTextSearchProject = findViewById(R.id.editTextSearchProject);
         buttonSearchProject = findViewById(R.id.buttonSearchProject);
+        buttonViewAllProjects = findViewById(R.id.buttonViewAllProjects);
         buttonBackToProfile = findViewById(R.id.buttonBackToProfile);
         rvProjectList = findViewById(R.id.rvProjects);
 
@@ -78,7 +80,7 @@ public class OpenProjectsActivity extends AppCompatActivity implements ProjectLi
         buttonBackToProfile.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Intent intent = factory.getIntent(OpenProjectsActivity.this, MainActivity.class);
+                Intent intent = factory.getIntent(OpenProjectsActivity.this, LandingActivity.class);
                 startActivity(intent);
             }
         });
@@ -90,17 +92,52 @@ public class OpenProjectsActivity extends AppCompatActivity implements ProjectLi
 
                 if(searchKeyword.isEmpty()){
                     Toast.makeText(OpenProjectsActivity.this, "No search term entered", Toast.LENGTH_SHORT).show();
-                    // call API to and access list of all published projects
+                    // Set Recyclerview to original list of all projects
+                    ProjectListAdapter projectListAdapter = new ProjectListAdapter(OpenProjectsActivity.this, projects, OpenProjectsActivity.this);
+                    rvProjectList.setAdapter(projectListAdapter);
+                    rvProjectList.setLayoutManager(new LinearLayoutManager(OpenProjectsActivity.this));
                 }else{
                     Toast.makeText(OpenProjectsActivity.this, "Search term: " + searchKeyword, Toast.LENGTH_SHORT).show();
-                    //call API and access the project information specific to keyword
-                    //get full list of published projects
-                    // Display list
+                    List<Project> searchedProjects = new ArrayList<>();
+                    boolean alreadyAdded;
+                    // Iterate through full list of projects
+                    for(Project temp: projects){
+                        // If title contains search keyword add to the list of Searched Projects
+                        alreadyAdded = false;
+                        if(temp.getProjectName() != null){
+                            if(temp.getProjectName().contains(searchKeyword)){
+                                searchedProjects.add(temp);
+                                alreadyAdded = true;
+                            }
+                        }
+                        // If description contains search keyword add to the list of Searched Projects
+                        if(temp.getDescription() != null) {
+                            if (temp.getDescription().contains(searchKeyword)) {
+                                if(!alreadyAdded) {
+                                    searchedProjects.add(temp);
+                                    alreadyAdded = true;
+                                }
+                            }
+                        }
+                    }
+                    // Display updated list in recyclerview
+                    ProjectListAdapter projectListAdapter = new ProjectListAdapter(OpenProjectsActivity.this, searchedProjects, OpenProjectsActivity.this);
+                    rvProjectList.setAdapter(projectListAdapter);
+                    rvProjectList.setLayoutManager(new LinearLayoutManager(OpenProjectsActivity.this));
                 }
             }
         });
 
+        buttonViewAllProjects.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ProjectListAdapter projectListAdapter = new ProjectListAdapter(OpenProjectsActivity.this, projects, OpenProjectsActivity.this);
+                rvProjectList.setAdapter(projectListAdapter);
+                rvProjectList.setLayoutManager(new LinearLayoutManager(OpenProjectsActivity.this));
+            }
+        });
     }
+
 
     @Override
     public void onProjectClick(int position) {
