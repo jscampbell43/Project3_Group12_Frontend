@@ -22,7 +22,7 @@
         android:id="@+id/textViewNewRequestWelcome"
         android:layout_width="256dp"
         android:layout_height="44dp"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="50dp"
         android:text="@string/new_request"
         android:textAlignment="center"
         android:textColor="@color/black"
@@ -48,17 +48,57 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewNewRequestWelcome" />
 
     <EditText
+        android:id="@+id/editTextBudget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:hint="@string/budget"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTitle" />
+
+    <EditText
         android:id="@+id/editTextDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:ems="10"
         android:hint="@string/description"
-        android:inputType="textPassword"
+        android:inputType="textPersonName"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextBudget" />
+
+    <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:ems="10"
+        android:hint="@string/your_email"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDescription" />
+
+    <EditText
+        android:id="@+id/editTextProposer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:ems="10"
+        android:hint="@string/your_username"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmail" />
 
     <EditText
         android:id="@+id/editTextImage"
@@ -67,11 +107,21 @@
         android:layout_marginTop="4dp"
         android:ems="10"
         android:hint="@string/image"
-        android:inputType="textPassword"
+        android:inputType="textPersonName"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextProposer" />
+
+    <Switch
+        android:id="@+id/switchAnon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/switch_anon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextImage" />
 
     <Button
         android:id="@+id/buttonPublish"
@@ -83,6 +133,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:backgroundTint="@color/teal_700"
         android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@+id/editTextImage" />
+        app:layout_constraintTop_toBottomOf="@+id/switchAnon" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
