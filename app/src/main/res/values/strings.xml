@@ -39,4 +39,8 @@
     <string name="current_projects">Current Projects</string>
     <string name="view_all_projects_button">View All</string>
     <string name="users_username">users_username</string>
+    <string name="budget">Budget</string>
+    <string name="your_email">Email</string>
+    <string name="your_username">"Proposer(Username) "</string>
+    <string name="switch_anon">Publish Anonomously</string>
 </resources>
