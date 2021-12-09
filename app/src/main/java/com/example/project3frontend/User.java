@@ -11,7 +11,11 @@ public class User {
     private boolean isFullfiller;
     private String email;
     private String password;
-
+    public User(String email, String username, String password) {
+        this.email = email;
+        this.username = username;
+        this.password = password;
+    }
     public String getUsername() {
         return username;
     }
