@@ -9,12 +9,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.SQLSyntaxErrorException;
 import java.util.List;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -27,8 +29,8 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText editTextRegisterUsername;
     private Button buttonRegister;
     private static final String TAG = "RegisterActivity";
+    private boolean check = true;
     private List<User> users;
-    private Boolean check = true;
 //    private DatabaseReference mDatabase;
 //    mDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -56,8 +58,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String username = editTextRegisterUsername.getText().toString();
                 String password = editTextRegisterPassword.getText().toString();
                 String passwordAgain = editTextRegisterPasswordAgain.getText().toString();
-
-                // If username or password is blank
+//                 If username or password is blank
                 if(email.isEmpty() || username.isEmpty() || password.isEmpty() || passwordAgain.isEmpty()) {
                     Toast.makeText(RegisterActivity.this, "All fields required", Toast.LENGTH_SHORT).show();
                 // If passwords do not match
@@ -84,19 +85,23 @@ public class RegisterActivity extends AppCompatActivity {
                                 return;
                             }
                             users = response.body();
-                            for (User user : users) {
-                                if(user.getEmail().equals(email)){
-                                    Toast.makeText(RegisterActivity.this, "Username already taken, try something different", Toast.LENGTH_LONG).show();
+                            for (User p : users) {
+                                Log.d(TAG, p.getEmail());
+                                if(p.getEmail().equals(email) || p.getUsername().equals(username)){
                                     check = false;
+                                    System.out.println("CHECKK: " + check);
                                     break;
                                 }
                             }
+                            System.out.println(check);
                             if (check == true){
                                 //Insert new user data into database here
-                                Toast.makeText(RegisterActivity.this, "User Successfully Created", Toast.LENGTH_LONG).show();
+                                postData(email, username, password);
+                                Toast.makeText(RegisterActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
                                 Intent intent = factory.getIntent(RegisterActivity.this, LoginActivity.class);
                                 startActivity(intent);
                             }else{
+                                Toast.makeText(RegisterActivity.this, "Username already taken, try something different", Toast.LENGTH_LONG).show();
                                 return;
                             }
                         }
@@ -105,6 +110,7 @@ public class RegisterActivity extends AppCompatActivity {
                             Toast.makeText(RegisterActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
+
                 }
             }
         });
@@ -117,13 +123,31 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
+    private void postData(String email, String username, String password) {
+        // Instance of Retrofit
+        // Note Change .baseUrl to our heroku hosted API
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://shrouded-hollows-49087.herokuapp.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
-    private Boolean validateInput(String user){
-//        if(user.getUser_first_name().isEmpty() || usersEntity.getUser_last_name().isEmpty() || usersEntity.getUser_name().isEmpty() || usersEntity.getUser_password().isEmpty()){
-//            return false;
-//        }else{
-//            return true;
-//        }
-        return true;
+        UserApi userApi = retrofit.create(UserApi.class);
+
+        Call<Void> call = userApi.createUser(email, username, password);
+        call.enqueue(new Callback<Void>(){
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(!response.isSuccessful()){
+                    Toast.makeText(RegisterActivity.this, "Code: " + response.code(), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(RegisterActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                System.out.println(t.getMessage());
+            }
+        });
+
     }
 }
