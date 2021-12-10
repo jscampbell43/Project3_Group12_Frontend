@@ -52,7 +52,12 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
     public void onBindViewHolder(@NonNull ProjectListViewHolder holder, int position) {
         holder.titleText.setText(projects.get(position).getProjectName());
         holder.descriptionText.setText(projects.get(position).getDescription());
-        Picasso.get().load(projects.get(position).getUrlString()).into(holder.projectImage);
+        if(projects.get(position).getUrlString() != "") {
+            Picasso.get().load(projects.get(position).getUrlString()).into(holder.projectImage);
+        }
+        else{
+            Picasso.get().load("https://i.ibb.co/n60FksF/Fila-logo1-small.png").into(holder.projectImage);
+        }
         //.setImageResource(projects.get(position).getUrlString());
 
 //        holder.projectDetailsLayout.setOnClickListener(new View.OnClickListener(){

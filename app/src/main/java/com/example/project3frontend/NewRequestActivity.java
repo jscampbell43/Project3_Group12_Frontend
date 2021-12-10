@@ -81,7 +81,9 @@ public class NewRequestActivity extends AppCompatActivity {
                             .addConverterFactory(GsonConverterFactory.create())
                             .build();
                     ProjectApi projectApi = retrofit.create(ProjectApi.class);
-
+                    if(image.equals("")) {
+                        image = "https://i.ibb.co/n60FksF/Fila-logo1-small.png";
+                    }
                     Call<Void> call = projectApi.createProject(title, budget, currency, description, email, proposer, image, date, isClaimed, claimedBy, anon);
                     call.enqueue(new Callback<Void>(){
                         @Override

@@ -66,6 +66,7 @@ public class OpenProjectsActivity extends AppCompatActivity implements ProjectLi
                 ProjectListAdapter projectListAdapter = new ProjectListAdapter(OpenProjectsActivity.this, projects, OpenProjectsActivity.this);
                 rvProjectList.setAdapter(projectListAdapter);
                 rvProjectList.setLayoutManager(new LinearLayoutManager(OpenProjectsActivity.this));
+
             }
 
             @Override
