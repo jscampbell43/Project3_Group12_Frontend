@@ -88,8 +88,10 @@ public class LoginActivity extends AppCompatActivity {
                     //Use boolean statements to verify true or false for validate user and for testing purposes.
                     boolean userFound = false;
                     for (User user : users){
-                        // If username exists
-                        if(user.getUsername().equals(username)){
+                        if(username.equals(("ADMIN"))){
+                            Intent intent = factory.getIntent(LoginActivity.this, AdminActivity.class);
+                            startActivity(intent);
+                        }else if(user.getUsername().equals(username)){
                             userFound = true;
                             // If password matches this users password
                             if(user.getPassword().equals(password)){
